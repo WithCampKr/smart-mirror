@@ -168,7 +168,17 @@
         "subway": {
             "text": "__역 __호선 __행선",
             "voice": "*station역 *linenumber(호)선 *updown",
-            "description": "음악을 다시 재생합니다."
+            "description": "지하철 도착 정보를 표시합니다"
+        },
+        "quiz_start": {
+            "text": "문제 시작",
+            "voice": "문제 시작",
+            "description": "퀴즈를 풀어보세요."
+        },
+        "check_quiz_answer": {
+          "text": "정답",
+         "voice": "정답 *answer",
+         "description": "정답확인."
         }
     }
 }

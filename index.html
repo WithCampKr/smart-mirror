@@ -22,6 +22,7 @@
     <!-- App -->
     <script src="config.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/quiz.js"></script>
     <script src="js/services/timebox.js"></script>
     <script src="js/services/soundcloud.js"></script>
     <script src="js/services/search.js"></script>
@@ -37,6 +38,7 @@
     <script src="js/services/traffic.js"></script>
     <script src="js/services/fitbit.js"></script>
     <script src="js/services/subway-service.js"></script>
+    <script src="js/services/quiz-service.js"></script>
     <script src="js/xml2json.js"></script>
     <script src="js/services/reminder.js"></script>
     <script src="js/controller.js"></script>
@@ -141,6 +143,11 @@
             <div class="timer-duration grey">{{timer.duration | secondsToDateTime | date:"mm:ss"}}</div>
             <timer-circle class="timer-circle" />
           </div>
+        </div>
+        <div class="contents-box animate-grow" ng-show="focus == 'quiz'">
+          <div style="font-size: 45px; margin-top: 10px; margin-bottom: 10px;">{{quiz}}</div>
+          <div style="font-size: 21px;">( 앞에 정답을 붙여서 맞춰주세요 ! )</div>
+          <p>{{checkQuizAnswer}}</p>
         </div>
       </div>
       <div class="bottom-center">

@@ -14,9 +14,11 @@
             TrafficService,
             TimerService,
             SubwayService,
+            QuizService,
             ReminderService,
             SearchService,
             SoundCloudService,
+            CURRENT_QUIZ,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
         var _this = this;
         $scope.listening = false;
@@ -207,6 +209,45 @@
                         $scope.focus = "subway";
                     });
                 });
+            });
+
+            // Quiz Start Service
+            addCommand('quiz_start', function() {
+                if ( CURRENT_QUIZ.quiz ) {
+
+                }
+                else {
+                  $scope.quiz = QuizService.getQuiz();
+                }
+
+                $scope.focus = "quiz";
+            });
+
+            // Check Quiz Answer
+            addCommand('check_quiz_answer', function(answer) {
+
+                if ( CURRENT_QUIZ.quiz ) {
+                  var isRightQuiz = QuizService.checkAnswer(answer);
+
+                  if ( isRightQuiz ) {
+
+                    $scope.checkQuizAnswer = "정답입니다. 5초 뒤에 다음문제가 나옵니다 ~~~ :)";
+
+                    $timeout(function() {
+                      $scope.quiz = QuizService.getQuiz();
+                      $scope.checkQuizAnswer = "";
+                    }, 5000);
+                  }
+                  else {
+
+                    $scope.checkQuizAnswer = "틀렸습니다";
+                  }
+                }
+                else {
+                  $scope.checkQuizAnswer = "'문제 시작'을 외쳐 !"
+                }
+
+                $scope.focus = "quiz";
             });
 
             // Hide everything and "sleep"
