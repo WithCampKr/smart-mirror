@@ -18,7 +18,7 @@
             ReminderService,
             SearchService,
             SoundCloudService,
-            CURRENT_QUIZ,
+            currentQuiz,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
         var _this = this;
         $scope.listening = false;
@@ -200,7 +200,6 @@
             addCommand('subway', function(station,linenumber,updown) {
                 SubwayService.init(station).then(function(){
                     SubwayService.getArriveTime(linenumber,updown).then(function(data){
-
                         if(data != null){
                             $scope.subwayinfo = data[0].ARRIVETIME + "에 " + data[0].SUBWAYNAME + "행 열차가 들어오겠습니다.";
                         }else{
@@ -213,40 +212,30 @@
 
             // Quiz Start Service
             addCommand('quiz_start', function() {
-                if ( CURRENT_QUIZ.quiz ) {
-
-                }
-                else {
+                if ( !currentQuiz.quiz ) {
                   $scope.quiz = QuizService.getQuiz();
                 }
-
                 $scope.focus = "quiz";
             });
 
             // Check Quiz Answer
             addCommand('check_quiz_answer', function(answer) {
-
-                if ( CURRENT_QUIZ.quiz ) {
+                if ( currentQuiz.quiz ) {
                   var isRightQuiz = QuizService.checkAnswer(answer);
-
                   if ( isRightQuiz ) {
-
                     $scope.checkQuizAnswer = "정답입니다. 5초 뒤에 다음문제가 나옵니다 ~~~ :)";
-
                     $timeout(function() {
                       $scope.quiz = QuizService.getQuiz();
                       $scope.checkQuizAnswer = "";
                     }, 5000);
                   }
                   else {
-
                     $scope.checkQuizAnswer = "틀렸습니다";
                   }
                 }
                 else {
                   $scope.checkQuizAnswer = "'문제 시작'을 외쳐 !"
                 }
-
                 $scope.focus = "quiz";
             });
 

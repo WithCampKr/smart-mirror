@@ -2,28 +2,28 @@
   'use strict';
 
   angular.module('SmartMirror')
-    .constant('CURRENT_QUIZ', {})
+    .constant('currentQuiz', {})
     .factory('QuizService', QuizService);
   
-  function QuizService(QUIZ_LIST, CURRENT_QUIZ) {
+  function QuizService(QUIZ_LIST, currentQuiz) {
     var service = {
       getQuiz: getQuiz,
       checkAnswer: checkAnswer
     };
-    return service;
 
     function getQuiz() {
       var random = parseInt( Math.random() * QUIZ_LIST.length );
       var quiz = QUIZ_LIST[random];
-      CURRENT_QUIZ.quiz = quiz.quiz;
-      CURRENT_QUIZ.answer = quiz.answer;
+      currentQuiz.quiz = quiz.quiz;
+      currentQuiz.answer = quiz.answer;
       
       return quiz.quiz;
     }
 
     function checkAnswer( answer ) {
-      return CURRENT_QUIZ.answer == answer
+      return currentQuiz.answer == answer
     }
-  }
 
+    return service;
+  }
 }(window.angular));
