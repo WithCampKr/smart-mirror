@@ -404,15 +404,17 @@
             AnnyangService.start(function(listening){
                 $scope.listening = listening;
             }, function(interimResult){
+                console.log("controlloer.js - interimResult : " + JSON.stringify(interimResult));
                 $scope.interimResult = interimResult;
                 $timeout.cancel(resetCommandTimeout);
             }, function(result){
+                console.log("controlloer.js - result : " + JSON.stringify(result));
                 if(typeof result != 'undefined'){
                     $scope.interimResult = result[0];
                     resetCommandTimeout = $timeout(restCommand, 5000);
                 }
             }, function(error){
-                console.log(error);
+                console.log("controlloer.js - error : " + JSON.stringify(error));
                 // if(error.error == "network"){
                     $scope.speechError = "Google Speech Recognizer is down :(";
                     AnnyangService.abort();
