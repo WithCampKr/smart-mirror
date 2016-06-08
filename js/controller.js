@@ -5,7 +5,6 @@
             AnnyangService,
             GeolocationService,
             WeatherService,
-            FitbitService,
             MapService,
             HueService,
             CalendarService,
@@ -15,7 +14,7 @@
             TimerService,
             SubwayService,
             QuizService,
-            ReminderService,
+            // ReminderService,
             SearchService,
             SoundCloudService,
             currentQuiz,
@@ -31,11 +30,6 @@
         });*/
         $scope.interimResult = $translate.instant('home.commands');
         $scope.layoutName = 'main';
-
-        $scope.fitbitEnabled = false;
-        if (typeof config.fitbit != 'undefined') {
-            $scope.fitbitEnabled = true;
-        }
 
         //set lang
         $scope.locale = config.language;
@@ -99,21 +93,6 @@
                     $scope.calendar = CalendarService.getFutureEvents();
                 }, function(error) {
                     console.log(error);
-                });
-
-                if ($scope.fitbitEnabled) {
-                    setTimeout(function() { refreshFitbitData(); }, 5000);
-                }
-            };
-
-            var refreshFitbitData = function() {
-                console.log('refreshing fitbit data');
-                FitbitService.profileSummary(function(response){
-                    $scope.fbDailyAverage = response;
-                });
-                
-                FitbitService.todaySummary(function(response){
-                    $scope.fbToday = response;
                 });
             };
 
@@ -220,11 +199,11 @@
 
             // Check Quiz Answer
             addCommand('check_quiz_answer', function(answer) {
-                if ( currentQuiz.quiz ) {
+                if (currentQuiz.quiz){
                   var isRightQuiz = QuizService.checkAnswer(answer);
-                  if ( isRightQuiz ) {
+                  if (isRightQuiz){
                     $scope.checkQuizAnswer = "정답입니다. 5초 뒤에 다음문제가 나옵니다 ~~~ :)";
-                    $timeout(function() {
+                    $timeout(function(){
                       $scope.quiz = QuizService.getQuiz();
                       $scope.checkQuizAnswer = "";
                     }, 5000);
@@ -349,38 +328,31 @@
               $scope.focus = "default";
             });
 
-            // Set a reminder
-            addCommand('reminder_insert', function(task) {
-                console.debug("I'll remind you to", task);
-                $scope.reminders = ReminderService.insertReminder(task);
-                $scope.focus = "reminders";
-            });
-
-            // Clear reminders
-            addCommand('reminder_clear', function() {
-                console.debug("Clearing reminders");
-                $scope.reminders = ReminderService.clearReminder();
-                $scope.focus = "default";
-            });
-
-            // Clear reminders
-            addCommand('reminder_show', function() {
-                console.debug("Showing reminders");
-                $scope.reminders = ReminderService.getReminders();
-                $scope.focus = "reminders";
-            });
+            // // Set a reminder
+            // addCommand('reminder_insert', function(task) {
+            //     console.debug("I'll remind you to", task);
+            //     $scope.reminders = ReminderService.insertReminder(task);
+            //     $scope.focus = "reminders";
+            // });
+            //
+            // // Clear reminders
+            // addCommand('reminder_clear', function() {
+            //     console.debug("Clearing reminders");
+            //     $scope.reminders = ReminderService.clearReminder();
+            //     $scope.focus = "default";
+            // });
+            //
+            // // Clear reminders
+            // addCommand('reminder_show', function() {
+            //     console.debug("Showing reminders");
+            //     $scope.reminders = ReminderService.getReminders();
+            //     $scope.focus = "reminders";
+            // });
 
             // Check the time
             addCommand('time_show', function(task) {
                  console.debug("It is", moment().format('h:mm:ss a'));
             });
-
-            //Show fitbit stats (registered only if fitbit is configured in the main config)
-            if ($scope.fitbitEnabled) {
-                AnnyangService.addCommand('show my walking', function() {
-                    refreshFitbitData();
-                });
-            }
 
             // Start timer
             addCommand('timer_start', function(duration) {
@@ -441,10 +413,10 @@
                 }
             }, function(error){
                 console.log(error);
-                if(error.error == "network"){
+                // if(error.error == "network"){
                     $scope.speechError = "Google Speech Recognizer is down :(";
                     AnnyangService.abort();
-                }
+                // }
             });
         };
 
