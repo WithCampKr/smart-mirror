@@ -147,7 +147,7 @@
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
                 $scope.focus = "default";
-            }
+            };
 
             $interval(refreshComic, 12*60*60000); // 12 hours
 
@@ -415,10 +415,10 @@
                 }
             }, function(error){
                 console.log("controlloer.js - error : " + JSON.stringify(error));
-                // if(error.error == "network"){
+                if(error.error == "network"){
                     $scope.speechError = "Google Speech Recognizer is down :(";
                     AnnyangService.abort();
-                // }
+                }
             });
         };
 
