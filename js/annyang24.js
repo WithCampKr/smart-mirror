@@ -583,16 +583,16 @@
      * @method trigger
      */
     trigger: function(sentences) {
-      if(!annyang.isListening()) {
-        if (debugState) {
-          if (!isListening) {
-            console.log('Cannot trigger while annyang is aborted');
-          } else {
-            console.log('Speech heard, but annyang is paused');
-          }
-        }
-        return;
-      }
+      // if(!annyang.isListening()) {
+      //   if (debugState) {
+      //     if (!isListening) {
+      //       console.log('Cannot trigger while annyang is aborted');
+      //     } else {
+      //       console.log('Speech heard, but annyang is paused');
+      //     }
+      //   }
+      //   return;
+      // }
 
       if (!Array.isArray(sentences)) {
         sentences = [sentences];

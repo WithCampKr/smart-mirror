@@ -55,8 +55,8 @@
         };
         
         service.abort = function(){
-            // annyang.abort();
-        }
+            annyang.abort();
+        };
 
         return service;
     }
