@@ -1,8 +1,10 @@
+#!/usr/bin/env node
+
 var express = require('express');
 var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-var port = process.env.PORT || 3000;
+var port = normalizePort(process.env.PORT || '3000');
 
 var path = require('path');
 
@@ -27,4 +29,21 @@ io.on('connection', function (socket) {
   });
 });
 
-app.listen(port);
+app.set('port', port);
+http.listen(port);
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
