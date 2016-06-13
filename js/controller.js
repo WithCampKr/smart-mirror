@@ -423,6 +423,12 @@
         };
 
         _this.init();
+
+        // setting socket
+        var socket = io();
+        socket.on('chat message', function(msg){
+            AnnyangService.trigger(msg.msg);
+        });
     }
 
     angular.module('SmartMirror')

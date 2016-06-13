@@ -22,6 +22,11 @@
             annyang.addCommands(service.commands);
             console.debug('added command "' + phrase + '"', service.commands);
         };
+        
+        service.trigger = function(msg) {
+            var command = [msg];
+            annyang.trigger(command);
+        };
 
         service.setLanguage = function(langCode) {
             annyang.setLanguage(langCode);
