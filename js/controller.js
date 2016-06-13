@@ -414,11 +414,11 @@
                     resetCommandTimeout = $timeout(restCommand, 5000);
                 }
             }, function(error){
-                console.log("controlloer.js - error : " + JSON.stringify(error));
-                if(error.error == "network"){
-                    $scope.speechError = "Google Speech Recognizer is down :(";
-                    AnnyangService.abort();
-                }
+                // console.log("controlloer.js - error : " + JSON.stringify(error));
+                // if(error.error == "network"){
+                //     $scope.speechError = "Google Speech Recognizer is down :(";
+                //     AnnyangService.abort();
+                // }
             });
         };
 

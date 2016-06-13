@@ -215,15 +215,15 @@
         isListening = false;
         invokeCallbacks(callbacks.end);
         // annyang will auto restart if it is closed automatically and not by user action.
-        if (autoRestart) {
-          // play nicely with the browser, and never restart annyang automatically more than once per second
-          var timeSinceLastStart = new Date().getTime()-lastStartedAt;
-          if (timeSinceLastStart < 1000) {
-            setTimeout(annyang.start, 1000-timeSinceLastStart);
-          } else {
-            annyang.start();
-          }
-        }
+        // if (autoRestart) {
+        //   // play nicely with the browser, and never restart annyang automatically more than once per second
+        //   var timeSinceLastStart = new Date().getTime()-lastStartedAt;
+        //   if (timeSinceLastStart < 1000) {
+        //     setTimeout(annyang.start, 1000-timeSinceLastStart);
+        //   } else {
+        //     annyang.start();
+        //   }
+        // }
       };
 
       recognition.onresult  = function(event) {
