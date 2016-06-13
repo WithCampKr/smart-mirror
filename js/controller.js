@@ -427,7 +427,8 @@
         // setting socket
         var socket = io();
         socket.on('chat message', function(msg){
-            AnnyangService.trigger(msg.msg);
+          console.log("socket listen !!!!!");
+          AnnyangService.trigger(msg.msg);
         });
     }
 
